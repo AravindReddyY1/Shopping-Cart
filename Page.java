@@ -1,4 +1,4 @@
-package com.vojislavk.restapi.models.data;
+package com.shoppingcart.models.data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
