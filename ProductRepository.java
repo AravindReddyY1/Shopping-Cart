@@ -1,8 +1,8 @@
-package com.vojislavk.cmsshoppingcart.models;
+package com.shoppingcart.models;
 
 import java.util.List;
 
-import com.vojislavk.cmsshoppingcart.models.data.Product;
+import com.shoppingcart.models.data.Product;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
