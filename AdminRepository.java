@@ -1,6 +1,6 @@
 package com.shoppingcart.models.data;
 
-import com.vojislavk.cmsshoppingcart.models.data.Admin;
+import com.shoppingcart.models.data.Admin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
