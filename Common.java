@@ -1,4 +1,4 @@
-package com.vojislavk.cmsshoppingcart;
+package com.shoppingcart.models.data;
 
 import java.security.Principal;
 import java.util.HashMap;
