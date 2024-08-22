@@ -2,10 +2,10 @@ package com.shoppingcart.models.data;
 
 import java.util.List;
 
-import com.vojislavk.cmsshoppingcart.models.CategoryRepository;
-import com.vojislavk.cmsshoppingcart.models.ProductRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Category;
-import com.vojislavk.cmsshoppingcart.models.data.Product;
+import com.shoppingcart.models.CategoryRepository;
+import com.shoppingcart.models.ProductRepository;
+import com.shoppingcart.models.data.Category;
+import com.shoppingcart.models.data.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
