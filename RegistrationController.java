@@ -1,9 +1,9 @@
-package com.vojislavk.cmsshoppingcart.security;
+package com.shoppingcart.security;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-import com.vojislavk.cmsshoppingcart.models.UserRepository;
-import com.vojislavk.cmsshoppingcart.models.data.User;
+import com.shoppingcart.models.UserRepository;
+import com.shoppingcart.models.data.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
