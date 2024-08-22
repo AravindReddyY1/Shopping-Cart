@@ -1,9 +1,9 @@
-package com.vojislavk.restapi.models;
+package com.restapi.models;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.vojislavk.restapi.models.data.Page;
+import com.restapi.models.data.Page;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
