@@ -1,9 +1,9 @@
-package com.vojislavk.cmsshoppingcart.security;
+package com.shoppingcart.security;
 
-import com.vojislavk.cmsshoppingcart.models.AdminRepository;
-import com.vojislavk.cmsshoppingcart.models.UserRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Admin;
-import com.vojislavk.cmsshoppingcart.models.data.User;
+import com.shoppingcart.models.AdminRepository;
+import com.shoppingcart.models.UserRepository;
+import com.sshoppingcart.models.data.Admin;
+import com.shoppingcart.models.data.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
