@@ -1,4 +1,4 @@
-package com.vojislavk.restapi.controllers;
+package com.shoppingcart.models.data;
 
 import java.util.List;
 import java.util.Optional;
