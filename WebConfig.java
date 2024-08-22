@@ -1,4 +1,4 @@
-package com.vojislavk.cmsshoppingcart;
+package com.shoppingcart;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
