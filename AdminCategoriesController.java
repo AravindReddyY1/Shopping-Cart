@@ -1,4 +1,4 @@
-package com.vojislavk.cmsshoppingcart.controllers;
+package com.shoppingcart.controllers;
 
 import java.util.List;
 
