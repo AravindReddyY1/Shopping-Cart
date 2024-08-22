@@ -3,8 +3,8 @@ package com.shoppingcart.models.data;
 import java.util.List;
 import java.util.Optional;
 
-import com.vojislavk.restapi.models.PageRepository;
-import com.vojislavk.restapi.models.data.Page;
+import com.restapi.models.PageRepository;
+import com.restapi.models.data.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
