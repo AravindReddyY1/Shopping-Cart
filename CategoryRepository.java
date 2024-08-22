@@ -2,7 +2,7 @@ package com.shoppingcart.models.data;
 
 import java.util.List;
 
-import com.vojislavk.cmsshoppingcart.models.data.Category;
+import com.shoppingcart.models.data.Category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
