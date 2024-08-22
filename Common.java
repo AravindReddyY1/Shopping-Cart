@@ -4,13 +4,13 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
-import com.vojislavk.cmsshoppingcart.models.Cart;
-import com.vojislavk.cmsshoppingcart.models.CategoryRepository;
-import com.vojislavk.cmsshoppingcart.models.PageRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Category;
-import com.vojislavk.cmsshoppingcart.models.data.Page;
+import com.shoppingcart.models.Cart;
+import com.shoppingcart.models.CategoryRepository;
+import com.shoppingcart.models.PageRepository;
+import com.shoppingcart.models.data.Category;
+import com.shoppingcart.models.data.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
