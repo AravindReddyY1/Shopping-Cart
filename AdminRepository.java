@@ -1,4 +1,4 @@
-package com.vojislavk.cmsshoppingcart.models;
+package com.shoppingcart.models.data;
 
 import com.vojislavk.cmsshoppingcart.models.data.Admin;
 
