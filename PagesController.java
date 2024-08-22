@@ -1,48 +1,50 @@
-package com.vojislavk.cmsshoppingcart.controllers;
+package com.vojislavk.restapi.controllers;
 
-import com.vojislavk.cmsshoppingcart.models.PageRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Page;
+import java.util.List;
+import java.util.Optional;
+
+import com.vojislavk.restapi.models.PageRepository;
+import com.vojislavk.restapi.models.data.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/")
+@RestController
+@RequestMapping(path = "/pages", produces = "application/json")
+@CrossOrigin(origins = "*")
 public class PagesController {
 
     @Autowired
     private PageRepository pageRepo;
 
-    @GetMapping
-    public String home(Model model) {
-        
-        Page page = pageRepo.findBySlug("home");
-        model.addAttribute("page", page);
-        
-        return "page";
-    }
+    @GetMapping("/all")
+    public Iterable<Page> pages() {
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+        List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
+
+        return pages;
     }
 
     @GetMapping("/{slug}")
-    public String page(@PathVariable String slug, Model model) {
-        
-        Page page = pageRepo.findBySlug(slug);
+    public ResponseEntity<Page> page(@PathVariable String slug) {
 
-        if (page == null) {
-            return "redirect:/";
+        // Page page = pageRepo.findBySlug(slug);
+        // if (page == null) return null;
+        // return page;
+
+        Optional<Page> optPage = pageRepo.findBySlug(slug);
+
+        if (optPage.isPresent()) {
+            return new ResponseEntity<>(optPage.get(), HttpStatus.OK);
         }
-        
-        model.addAttribute("page", page);
-        
-        return "page";
+
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
     
 }

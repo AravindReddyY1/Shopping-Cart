@@ -1,17 +1,15 @@
-package com.vojislavk.cmsshoppingcart.models;
+package com.vojislavk.restapi.models;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.vojislavk.cmsshoppingcart.models.data.Page;
+import com.vojislavk.restapi.models.data.Page;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PageRepository extends JpaRepository<Page, Integer> {
 
-    Page findBySlug(String slug);
-
-    // @Query("SELECT p FROM Page p WHERE p.id != :id and p.slug = :slug")
-    // Page findBySlug(int id, String slug);
+    Optional<Page> findBySlug(String slug);
 
     Page findBySlugAndIdNot(String slug, int id);
 

@@ -1,151 +1,69 @@
-package com.vojislavk.cmsshoppingcart.controllers;
+package com.vojislavk.restapi.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
-import javax.validation.Valid;
-
-import com.vojislavk.cmsshoppingcart.models.PageRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Page;
+import com.vojislavk.restapi.models.PageRepository;
+import com.vojislavk.restapi.models.data.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/admin/pages")
+@RestController
+@RequestMapping(path = "/admin/pages", produces = "application/json")
+@CrossOrigin(origins = "*")
 public class AdminPagesController {
 
     @Autowired
     private PageRepository pageRepo;
 
-    // public AdminPagesController(PageRepository pageRepo) {
-    //     this.pageRepo = pageRepo;
-    // }
-
     @GetMapping
-    public String index(Model model) {
+    public Iterable<Page> index() {
 
         List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
 
-        model.addAttribute("pages", pages);
-
-        return "admin/pages/index";
+        return pages;
     }
 
-    @GetMapping("/add")
-    public String add(@ModelAttribute Page page) {
-        
-        // model.addAttribute("page", new Page());
-
-        return "admin/pages/add";
-    }
-
-    @PostMapping("/add")
-    public String add(@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "admin/pages/add";
-        }
-
-        redirectAttributes.addFlashAttribute("message", "Page added");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-        String slug = page.getSlug() == "" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ", "-");
-
-        Page slugExists = pageRepo.findBySlug(slug);
-
-        if ( slugExists != null ) {
-            redirectAttributes.addFlashAttribute("message", "Slug exists, choose another");
-            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-            redirectAttributes.addFlashAttribute("page", page);
-
-        } else {
-            page.setSlug(slug);
-            page.setSorting(100);
-
-            pageRepo.save(page);
-        }
-
-        return "redirect:/admin/pages/add";
+    @PostMapping(path = "/add", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Page add(@RequestBody Page page) {
+        return pageRepo.save(page);
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable int id, Model model) {
-
-        Page page = pageRepo.getOne(id);
-
-        model.addAttribute("page", page);
-
-        return "admin/pages/edit";
+    public ResponseEntity<Page> edit(@PathVariable int id) {
         
+        Optional<Page> page = pageRepo.findById(id);
+
+        return new ResponseEntity<>(page.get(), HttpStatus.OK);
     }
 
-    @PostMapping("/edit")
-    public String edit(@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
-        Page pageCurrent = pageRepo.getOne(page.getId());
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("pageTitle", pageCurrent.getTitle());
-            return "admin/pages/edit";
-        }
-
-        redirectAttributes.addFlashAttribute("message", "Page edited");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-        String slug = page.getSlug() == "" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ", "-");
-
-        Page slugExists = pageRepo.findBySlugAndIdNot(slug, page.getId());
-
-        if ( slugExists != null ) {
-            redirectAttributes.addFlashAttribute("message", "Slug exists, choose another");
-            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-            redirectAttributes.addFlashAttribute("page", page);
-
-        } else {
-            page.setSlug(slug);
-
-            pageRepo.save(page);
-        }
-
-        return "redirect:/admin/pages/edit/" + page.getId();
+    @PutMapping("/edit")
+    public Page put(@RequestBody Page page) {
+        return pageRepo.save(page);
     }
 
-    @GetMapping("/delete/{id}")
-    public String edit(@PathVariable int id, RedirectAttributes redirectAttributes) {
-
-        pageRepo.deleteById(id);
-
-        redirectAttributes.addFlashAttribute("message", "Page deleted");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-        return "redirect:/admin/pages";
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) {
         
-    }
-
-    @PostMapping("/reorder")
-    public @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
-        
-        int count = 1;
-        Page page;
-
-        for (int pageId : id) {
-            page = pageRepo.getOne(pageId);
-            page.setSorting(count);
-            pageRepo.save(page);
-            count++;
+        try {
+            pageRepo.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            
         }
-
-        return "ok";
     }
-    
 }
