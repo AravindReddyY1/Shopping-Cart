@@ -2,12 +2,12 @@ package com.shoppingcart.models.data;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
-import com.vojislavk.cmsshoppingcart.models.Cart;
-import com.vojislavk.cmsshoppingcart.models.ProductRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Product;
+import com.shoppingcart.models.Cart;
+import com.shoppingcart.models.ProductRepository;
+import com.shoppingcart.models.data.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
