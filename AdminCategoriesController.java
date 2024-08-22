@@ -2,10 +2,10 @@ package com.shoppingcart.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
-import com.vojislavk.cmsshoppingcart.models.CategoryRepository;
-import com.vojislavk.cmsshoppingcart.models.data.Category;
+import com.shoppingcart.models.CategoryRepository;
+import com.shoppingcart.models.data.Category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
