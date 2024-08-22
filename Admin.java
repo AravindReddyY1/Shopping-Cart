@@ -1,4 +1,4 @@
-package com.vojislavk.cmsshoppingcart.models.data;
+package com.shoppingcart.models.data;
 
 import java.util.Arrays;
 import java.util.Collection;
